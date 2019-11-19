@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author zhangxuhai
  * @date 2019/11/18
 */
-public class ParkingLot {
+public class ParkingLot implements ParkingAble {
     private ArrayList<Ticket> carContainer;
     private int size = 0;
 
@@ -16,6 +16,7 @@ public class ParkingLot {
         carContainer = new ArrayList<>();
     }
 
+    @Override
     public Ticket park() {
         if (size == carContainer.size()) {
             throw new ParkingLotFullException();
@@ -26,6 +27,7 @@ public class ParkingLot {
         return ticket;
     }
 
+    @Override
     public Ticket pick(Ticket ticket) {
         Ticket result = carContainer
                 .stream()

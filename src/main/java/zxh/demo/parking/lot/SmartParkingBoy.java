@@ -9,13 +9,14 @@ import java.util.Objects;
  * @author zhangxuhai
  * @date 2019/11/19
 */
-public class SmartParkingBoy {
+public class SmartParkingBoy implements ParkingAble {
     private List<ParkingLot> parkingLots;
 
     public SmartParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
+    @Override
     public Ticket park() {
         return parkingLots
                 .stream()
@@ -24,6 +25,7 @@ public class SmartParkingBoy {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
     public Ticket pick(Ticket ticket) {
         Ticket t = null;
         for (ParkingLot p : parkingLots) {
