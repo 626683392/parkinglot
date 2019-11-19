@@ -35,4 +35,8 @@ public class ParkingLot {
         carContainer.remove(result);
         return result;
     }
+
+    public int emptySlotLeft() {
+        return size - carContainer.size();
+    }
 }
