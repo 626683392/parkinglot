@@ -10,21 +10,14 @@ import java.util.function.BiFunction;
  * @author zhangxuhai
  * @date 2019/11/18
 */
-public class GraduateParkingBoy implements ParkingAble {
-    private List<ParkingLot> parkingLots;
-
+public class GraduateParkingBoy extends ParkingBoy {
     public GraduateParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
     @Override
     public Ticket park() {
         return iterateParkingLotsToApply((p, t) -> p.park(), null, ParkingLotFullException.class);
-    }
-
-    @Override
-    public Ticket pick(Ticket ticket) {
-        return iterateParkingLotsToApply(ParkingLot::pick, ticket, InvalidTicketException.class);
     }
 
     private Ticket iterateParkingLotsToApply(BiFunction<ParkingLot, Ticket, Ticket> function, Ticket inputTicket, Class<? extends RuntimeException> exceptionType) {
