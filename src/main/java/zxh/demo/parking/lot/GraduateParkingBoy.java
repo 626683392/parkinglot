@@ -1,9 +1,6 @@
 package zxh.demo.parking.lot;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.BiFunction;
 
 /**
  * GraduateParkingBoy:
@@ -17,35 +14,11 @@ public class GraduateParkingBoy extends ParkingBoy {
 
     @Override
     public Ticket park() {
-        return iterateParkingLotsToApply((p, t) -> p.park(), null, ParkingLotFullException.class);
-    }
-
-    private Ticket iterateParkingLotsToApply(BiFunction<ParkingLot, Ticket, Ticket> function, Ticket inputTicket, Class<? extends RuntimeException> exceptionType) {
-
-        Ticket result = null;
-        for (ParkingLot p : parkingLots) {
-            try {
-                result = function.apply(p, inputTicket);
-                break;
-            } catch (Exception e) {
-                // do nothing
-            }
-        }
-
-        if (Objects.isNull(result)) {
-            RuntimeException exception;
-            try {
-                exception = exceptionType.getDeclaredConstructor().newInstance();
-            } catch (InstantiationException
-                    | IllegalAccessException
-                    | InvocationTargetException
-                    | NoSuchMethodException e) {
-                throw new IllegalArgumentException("Wrong Exception.");
-            }
-
-            throw exception;
-        }
-
-        return result;
+        return parkingLots
+                .stream()
+                .filter(p -> !p.isFull())
+                .findFirst()
+                .map(ParkingLot::park)
+                .orElseThrow(ParkingLotFullException::new);
     }
 }
