@@ -45,4 +45,8 @@ public class ParkingLot implements ParkingAble {
     public boolean isFull() {
         return emptySlotLeft() == 0;
     }
+
+    public int getSize() {
+        return size;
+    }
 }
