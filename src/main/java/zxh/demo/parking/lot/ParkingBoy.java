@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author zhangxuhai
  * @date 2019/11/20
 */
-public abstract class ParkingBoy implements ParkingAble{
+public abstract class ParkingBoy implements ParkingAble {
 
     protected List<ParkingLot> parkingLots;
 
@@ -32,5 +32,10 @@ public abstract class ParkingBoy implements ParkingAble{
         }
 
         return t;
+    }
+
+    @Override
+    public boolean isFull() {
+        return parkingLots.stream().allMatch(ParkingLot::isFull);
     }
 }

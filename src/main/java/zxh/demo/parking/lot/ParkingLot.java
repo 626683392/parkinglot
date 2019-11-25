@@ -42,6 +42,7 @@ public class ParkingLot implements ParkingAble {
         return size - carContainer.size();
     }
 
+    @Override
     public boolean isFull() {
         return emptySlotLeft() == 0;
     }

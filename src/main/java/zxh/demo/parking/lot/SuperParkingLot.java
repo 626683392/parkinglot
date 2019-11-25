@@ -18,7 +18,7 @@ public class SuperParkingLot extends ParkingBoy {
         return parkingLots
                 .stream()
                 .max(Comparator.comparingDouble(p -> p.emptySlotLeft() / (double) p.getSize()))
-                .map(ParkingLot::park)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(ParkingLotFullException::new)
+                .park();
     }
 }

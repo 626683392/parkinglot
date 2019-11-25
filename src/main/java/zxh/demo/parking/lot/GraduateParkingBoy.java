@@ -18,7 +18,7 @@ public class GraduateParkingBoy extends ParkingBoy {
                 .stream()
                 .filter(p -> !p.isFull())
                 .findFirst()
-                .map(ParkingLot::park)
-                .orElseThrow(ParkingLotFullException::new);
+                .orElseThrow(ParkingLotFullException::new)
+                .park();
     }
 }

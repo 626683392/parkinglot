@@ -19,8 +19,9 @@ public class SmartParkingBoy extends ParkingBoy {
         return parkingLots
                 .stream()
                 .max(Comparator.comparingInt(ParkingLot::emptySlotLeft))
-                .map(ParkingLot::park)
-                .orElseThrow(IllegalArgumentException::new);
+                .filter(parkingLot -> !parkingLot.isFull())
+                .orElseThrow(ParkingLotFullException::new)
+                .park();
     }
 
 }

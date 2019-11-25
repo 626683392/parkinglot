@@ -9,4 +9,6 @@ public interface ParkingAble {
     Ticket park();
 
     Ticket pick(Ticket ticket);
+
+    boolean isFull();
 }
