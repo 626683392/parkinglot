@@ -1,7 +1,6 @@
 package zxh.demo.parking.lot;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * ParkingBoy:
@@ -18,20 +17,7 @@ public abstract class ParkingBoy implements ParkingAble {
 
     @Override
     public Ticket pick(Ticket ticket) {
-        Ticket t = null;
-        for (ParkingLot p : parkingLots) {
-            try {
-                t = p.pick(ticket);
-            } catch (InvalidTicketException e) {
-                // do nothing
-            }
-        }
-
-        if (Objects.isNull(t)) {
-            throw new InvalidTicketException();
-        }
-
-        return t;
+        return pickByParkingAble(parkingLots, ticket);
     }
 
     @Override
