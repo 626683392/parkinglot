@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * @author zhangxuhai
  * @date 2019/11/25
 */
-public class SuperParkingLotTest {
+public class SuperParkingBoyTest {
     private List<ParkingLot> parkingLots = new ArrayList<>();
     ParkingLot p1;
     ParkingLot p2;
@@ -35,8 +35,8 @@ public class SuperParkingLotTest {
         p2.park();
         p2.park();
         p2.park();
-        SuperParkingLot superParkingLot = new SuperParkingLot(parkingLots);
-        superParkingLot.park();
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
+        superParkingBoy.park();
         assertEquals(2, p1.emptySlotLeft());
         assertEquals(4, p2.emptySlotLeft());
     }
@@ -49,19 +49,19 @@ public class SuperParkingLotTest {
         p2.park();
         p2.park();
 
-        SuperParkingLot superParkingLot = new SuperParkingLot(parkingLots);
-        superParkingLot.park();
-        superParkingLot.park();
-        superParkingLot.park();
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
+        superParkingBoy.park();
+        superParkingBoy.park();
+        superParkingBoy.park();
         assertEquals(2, p1.emptySlotLeft());
         assertEquals(2, p2.emptySlotLeft());
     }
 
     @Test
     public void should_park_some_car_by_order() {
-        SuperParkingLot superParkingLot = new SuperParkingLot(parkingLots);
-        superParkingLot.park();
-        superParkingLot.park();
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
+        superParkingBoy.park();
+        superParkingBoy.park();
         assertEquals(4, p1.emptySlotLeft());
         assertEquals(6, p2.emptySlotLeft());
     }
@@ -78,32 +78,32 @@ public class SuperParkingLotTest {
         p2.park();
         p2.park();
 
-        SuperParkingLot superParkingLot = new SuperParkingLot(parkingLots);
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
         expectedException.expect(ParkingLotFullException.class);
-        superParkingLot.park();
+        superParkingBoy.park();
     }
 
     @Test
     public void should_pick_car_from_empty_parking_lot() {
-        SuperParkingLot superParkingLot = new SuperParkingLot(parkingLots);
-        Ticket ticket = superParkingLot.park();
-        assertEquals(ticket, superParkingLot.pick(ticket));
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
+        Ticket ticket = superParkingBoy.park();
+        assertEquals(ticket, superParkingBoy.pick(ticket));
     }
 
     @Test
     public void should_say_no_to_invalid_ticket() {
-        SuperParkingLot superParkingLot = new SuperParkingLot(parkingLots);
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
         Ticket ticket = Ticket.create();
         expectedException.expect(InvalidTicketException.class);
-        superParkingLot.pick(ticket);
+        superParkingBoy.pick(ticket);
     }
 
     @Test
     public void should_say_no_to_used_ticket() {
-        SuperParkingLot superParkingLot = new SuperParkingLot(parkingLots);
-        Ticket ticket = superParkingLot.park();
-        assertEquals(ticket, superParkingLot.pick(ticket));
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy(parkingLots);
+        Ticket ticket = superParkingBoy.park();
+        assertEquals(ticket, superParkingBoy.pick(ticket));
         expectedException.expect(InvalidTicketException.class);
-        superParkingLot.pick(ticket);
+        superParkingBoy.pick(ticket);
     }
 }

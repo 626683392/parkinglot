@@ -8,8 +8,8 @@ import java.util.List;
  * @author zhangxuhai
  * @date 2019/11/25
 */
-public class SuperParkingLot extends ParkingBoy {
-    SuperParkingLot(List<ParkingLot> parkingLots) {
+public class SuperParkingBoy extends ParkingBoy {
+    SuperParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 
