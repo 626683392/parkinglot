@@ -9,13 +9,12 @@ import java.util.List;
  * @author zhangxuhai
  * @date 2019/11/30
  */
-public class SmartParkingBoy {
-    private List<ParkingLot> parkingLots;
-
+public class SmartParkingBoy extends ParkingBoy {
     public SmartParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
+    @Override
     public Ticket park(Car car) {
         return parkingLots
                 .stream()
@@ -24,14 +23,5 @@ public class SmartParkingBoy {
                 .findFirst()
                 .orElseThrow(ParkingLotFullException::new)
                 .park(car);
-    }
-
-    public Car pick(Ticket t) {
-        return parkingLots
-                .stream()
-                .filter(p -> p.contains(t))
-                .findFirst()
-                .orElseThrow(InvalidTicketException::new)
-                .pick(t);
     }
 }

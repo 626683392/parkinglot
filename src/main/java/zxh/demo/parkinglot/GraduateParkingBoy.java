@@ -7,13 +7,12 @@ import java.util.List;
  * @author zhangxuhai
  * @date 2019/11/30
 */
-public class GraduateParkingBoy {
-    private List<ParkingLot> parkingLots;
-
+public class GraduateParkingBoy extends ParkingBoy {
     public GraduateParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
+    @Override
     public Ticket park(Car car) {
         return parkingLots
                 .stream()
@@ -21,14 +20,5 @@ public class GraduateParkingBoy {
                 .findFirst()
                 .orElseThrow(ParkingLotFullException::new)
                 .park(car);
-    }
-
-    public Car pick(Ticket t) {
-        return parkingLots
-                .stream()
-                .filter(p -> p.contains(t))
-                .findFirst()
-                .orElseThrow(InvalidTicketException::new)
-                .pick(t);
     }
 }
