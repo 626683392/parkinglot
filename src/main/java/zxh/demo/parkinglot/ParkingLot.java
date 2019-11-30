@@ -41,4 +41,8 @@ public class ParkingLot {
     public boolean contains(Ticket t) {
         return slots.containsKey(t);
     }
+
+    public int getEmptySlots() {
+        return capacity - slots.size();
+    }
 }
