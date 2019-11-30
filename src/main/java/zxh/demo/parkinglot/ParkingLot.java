@@ -11,7 +11,6 @@ import java.util.Optional;
 */
 public class ParkingLot {
     private int capacity;
-    private int index = 0;
     private Map<Ticket, Car> slots;
 
     public ParkingLot(int capacity) {
@@ -33,5 +32,13 @@ public class ParkingLot {
         Car car = Optional.ofNullable(slots.get(t)).orElseThrow(InvalidTicketException::new);
         slots.remove(t);
         return car;
+    }
+
+    public boolean isFull() {
+        return slots.size() == capacity;
+    }
+
+    public boolean contains(Ticket t) {
+        return slots.containsKey(t);
     }
 }
