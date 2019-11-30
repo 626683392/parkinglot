@@ -45,4 +45,8 @@ public class ParkingLot {
     public int getEmptySlots() {
         return capacity - slots.size();
     }
+
+    public double getEmptyRate() {
+        return 1- (slots.size() / (double) capacity);
+    }
 }
