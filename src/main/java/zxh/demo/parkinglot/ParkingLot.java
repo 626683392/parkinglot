@@ -9,7 +9,7 @@ import java.util.Optional;
  * @author zhangxuhai
  * @date 2019/11/30
 */
-public class ParkingLot {
+public class ParkingLot implements ParkingAble {
     private int capacity;
     private Map<Ticket, Car> slots;
 

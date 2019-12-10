@@ -7,21 +7,25 @@ import java.util.List;
  * @author zhangxuhai
  * @date 2019/11/30
 */
-public abstract class ParkingBoy {
+public abstract class ParkingBoy implements ParkingAble {
     protected List<ParkingLot> parkingLots;
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
-    abstract public Ticket park(Car car);
-
+    @Override
     public Car pick(Ticket t) {
-        return parkingLots
-                .stream()
-                .filter(p -> p.contains(t))
-                .findFirst()
-                .orElseThrow(InvalidTicketException::new)
-                .pick(t);
+        return PickUtil.pickFrom(parkingLots, t);
+    }
+
+    @Override
+    public boolean isFull() {
+        return parkingLots.stream().allMatch(ParkingLot::isFull);
+    }
+
+    @Override
+    public boolean contains(Ticket ticket) {
+        return parkingLots.stream().anyMatch(parkingLot -> parkingLot.contains(ticket));
     }
 }
